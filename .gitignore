@@ -1,0 +1,24 @@
+# Generated outputs and local reports
+output.csv
+*.log
+log.txt
+evaluation_report.md
+usage_report.md
+
+# Challenge data and evidence
+dataset/
+*.zip
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
