@@ -28,4 +28,4 @@ When available, run from the repository root:
 python bs/main.py
 ```
 
-Optional PDF and image evidence requires `pdftotext` and `tesseract-ocr`.
+Going to add LLM API soon to make it completely agentic.
