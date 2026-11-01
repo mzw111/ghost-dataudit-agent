@@ -1,53 +1,31 @@
 # Ghost Data Audit
 
-Deterministic, evidence-driven deletion-audit engine for checking whether data
-remains across databases, logs, exports, search indexes, archives, backups,
-and active data flows.
+Solution for the **HackerRank Orchestrate October challenge: Ghost Data Still
+Exists**.
 
-The implementation currently lives under [`bs/`](./bs). The name `ghost-data-audit`
-is used for the project and its GitHub repository.
+This project determines whether deletion requests were completed across
+databases, logs, exports, search indexes, archives, backups, and active data
+flows. It is deterministic, evidence-driven, and uses only the Python standard
+library.
 
-## Setup
-- Python 3.9+ (standard library only; no pip packages).
-- Optional system tools for PDF/screenshot evidence: `pdftotext` (poppler-utils) and `tesseract-ocr`. Without them the
-  documents are skipped and accuracy drops for the few document-backed cases.
-- No environment variables or credentials are needed.
+## Architecture
 
-## Run
-The complete challenge dataset is not included in this repository export. When
-`dataset/` is available, run from the repository root:
+The implementation is in [`bs/`](./bs):
 
-    python bs/main.py
+- `bs/main.py` runs the audit and validates `output.csv`.
+- `bs/audit/` parses evidence, resolves identities, reconstructs resource
+  state, applies deletion rules, and builds the ordered result.
+- `bs/evaluation/` contains sample scoring and diagnostic scripts.
 
-This writes `output.csv` at the repository root and validates it (exit code 1
-on any problem). Options: `--dataset DIR --cases CSV --output FILE` and
-`--sample-context` (off by default).
+Evidence after `audit_at` is ignored, and ambiguous activity is not guessed.
 
-## Evaluate
-    python bs/evaluation/evaluate.py
-    python bs/evaluation/custom_cases.py
-    python bs/evaluation/context_impact.py
-    python bs/evaluation/intake_crosscheck.py
+## Start
 
-The evaluation scripts require the challenge dataset and sample files.
+Requires Python 3.9+. The challenge `dataset/` is not included in this export.
+When available, run from the repository root:
 
-## Architecture (`bs/audit/`)
-- `logparse.py` - parser for 7 log layouts. `evidence.py` - SQL/JSON/log/txt/PDF/PNG -> uniform observations.
-- `identity.py` - current + historical emails, phones, sha256 hashes per user_id.
-- `engine.py` - resource linking, account resolution from activity, state at `audit_at`, policy treatment, step ordering.
-- `intent.py` - multilingual deletion-intent rules. `output.py` - serializer and schema/ordering/evidence validator.
+```powershell
+python bs/main.py
+```
 
-## Key rules
-- Evidence captured after `audit_at` is ignored.
-- Reported statuses and activity results are never treated as proof of state.
-- The latest eligible observation of each resource decides its state.
-- When activity evidence is ambiguous, the engine does not guess by case order or timing.
-
-Accounts are tied per person, so a repeat request by the same user reuses the
-same account. Sample requests do not influence the full prediction set.
-
-## Repository hygiene
-
-Generated outputs, local logs, datasets, caches, and virtual environments are
-ignored by Git. Keep challenge-only data local and do not commit credentials
-or private evidence files.
+Optional PDF and image evidence requires `pdftotext` and `tesseract-ocr`.
