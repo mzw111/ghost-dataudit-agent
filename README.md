@@ -48,5 +48,5 @@ empty `matches` list.
 
 
 
-Going to add LLM API soon to make it completely agentic.
+Going to add LLM API soon to make it work like agentic system.
 >>>>>>> origin/main
