@@ -29,3 +29,20 @@ python bs/main.py
 ```
 
 Optional PDF and image evidence requires `pdftotext` and `tesseract-ocr`.
+
+## Agent evidence tool
+
+The deterministic `search_evidence` tool is available from `bs.agent`:
+
+```python
+from agent import AgentState, search_evidence
+
+state = AgentState("dataset")
+result = search_evidence("case_001", "account", state)
+```
+
+An agent-facing adapter should expose only `case_id` and `query`; the backend
+injects `AgentState`. Results contain parsed evidence IDs, timestamps, resource
+IDs, and excerpts derived from the existing `Evidence` parser. Unknown cases
+return a controlled error, while valid searches with no matches return an
+empty `matches` list.
