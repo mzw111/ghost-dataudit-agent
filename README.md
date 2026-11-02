@@ -28,8 +28,6 @@ When available, run from the repository root:
 python bs/main.py
 ```
 
-<<<<<<< HEAD
-Optional PDF and image evidence requires `pdftotext` and `tesseract-ocr`.
 
 ## Agent evidence tool
 
