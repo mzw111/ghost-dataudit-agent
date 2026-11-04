@@ -1,5 +1,5 @@
 """Deterministic tools exposed to an agent."""
-from audit.common import system_of
+from ..audit.common import system_of
 
 
 def _error(code, message):
