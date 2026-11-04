@@ -1,6 +1,6 @@
 # Ghost Data Audit
 
-Solution for the **HackerRank Orchestrate October challenge: Ghost Data Still
+This project is the solution for the **HackerRank Orchestrate October challenge: Ghost Data Still
 Exists**.
 
 This project determines whether deletion requests were completed across
