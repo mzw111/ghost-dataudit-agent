@@ -2,7 +2,7 @@
 import csv
 import os
 
-from audit.engine import Engine
+from ..audit.engine import Engine
 
 
 class AgentState:
